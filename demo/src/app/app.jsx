@@ -12,6 +12,13 @@ import Login from './components/Login'; // Our custom react component
 //https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
+function forceSSL() {
+  if (window.location.href.indexOf('http:') === 0) {
+    window.location = window.location.href.replace(/^http\:/, 'https:')
+  }
+}
+forceSSL()
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route component={Main}>

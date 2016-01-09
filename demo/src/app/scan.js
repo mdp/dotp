@@ -6,7 +6,14 @@ function redirect(publicID) {
   }
 }
 
+function forceSSL() {
+  if (window.location.href.indexOf('http:') === 0) {
+    window.location = window.location.href.replace(/^http\:/, 'https:')
+  }
+}
+
 $(document).ready(function(){
+  forceSSL()
   $('#reader').html5_qrcode(function(data){
     $('#read').html(data);
     document.body.style.background = '#44AA44';

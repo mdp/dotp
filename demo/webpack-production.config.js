@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-var buildPath = path.resolve(__dirname, 'build');
+var buildPath = path.resolve(__dirname, 'build/dotp');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var TransferWebpackPlugin = require('transfer-webpack-plugin');
 

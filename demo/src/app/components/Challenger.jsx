@@ -12,7 +12,7 @@ const containerStyle = {
 // This would normally all by done on the server, but for demonstration
 // purposes we are doing it all client side
 const ServerSecret = new Buffer('This is the seed for the server secret key')
-const ServerPrivateKey = dotpCrypt.nacl.hash(ServerSecret).subarray(0,32)
+const ServerPrivateKey = dotpCrypt.nacl.hash(ServerSecret).slice(0,32)
 const ServerKeyPair = dotpCrypt.getKeyPair(ServerPrivateKey)
 const OTPCharSet = '023456789abcdefghjkmnpqrstuvwxyz'
 
@@ -35,8 +35,6 @@ function randomUpTo(k, r, s) {
 }
 
 class Challenger extends React.Component {
-
-  static cancelable = true
 
   constructor (p, c) {
     super(p, c)

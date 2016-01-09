@@ -1,0 +1,4 @@
+[submodule "pages"]
+	path = pages
+	url = git@github.com:mdp/dotp.git
+	branch = gh-pages
