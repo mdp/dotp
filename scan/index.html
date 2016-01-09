@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/scan.css">
+
+    <title>dOTP Scanner</title>
+  </head>
+  <body>
+
+    <div class='container centered'>
+    <h3 class="center">Scan your dOTP Public ID</h3>
+
+    <div id="reader" style="width:300px;height:250px;margin:auto;"></div>
+
+    <h6 class="center">Result</h6>
+    <span id="read" class="center"></span>
+
+    <h6 class="center">Video Error</h6>
+    <span id="vid_error" class="center"></span>
+    </div>
+
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/html5-qrcode.min.js"></script>
+    <script src="../scan.js"></script>
+
+  </body>
+</html>

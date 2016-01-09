@@ -1,0 +1,18 @@
+.centered {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.qrcode img{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+input.form-control.success {
+  background-color : #99FF99;
+}
