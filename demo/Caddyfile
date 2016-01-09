@@ -1,0 +1,4 @@
+:443
+tls {$HOME}/.devCerts/cert.pem {$HOME}/.devCerts/key.pem
+log stdout
+root ./build
