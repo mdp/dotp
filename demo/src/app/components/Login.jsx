@@ -1,4 +1,5 @@
 import React from 'react';
+import dotpCrypt from 'dotp-crypt';
 
 const containerStyle = {
   margin: '0 0',
@@ -19,16 +20,23 @@ class Login extends React.Component {
     return {
       publicID: '',
       returnHref: scanHref,
+      error: '',
     };
   }
 
   _updatePublicID(e) {
-    this.setState({response: e.target.value})
+    this.setState({publicID: e.target.value})
   }
 
   _login(e) {
     e.preventDefault()
-    this.setState({response: e.target.value})
+    try {
+      dotpCrypt.getPublicKeyFromPublicID(this.state.publicID)
+      this.setState({error: ''})
+      this.props.history.pushState(null, `/${this.state.publicID}`)
+    } catch (e) {
+      this.setState({error: e.message})
+    }
   }
 
   componentDidMount() {
@@ -39,6 +47,7 @@ class Login extends React.Component {
     return (
       <div style={containerStyle}>
         <div className='container align-left'>
+          <p class='error'>{this.state.error}</p>
           <form onSubmit={this._login.bind(this)}>
             <div className="form-group">
               <label>Public Key</label> <a href={this.state.returnHref}>Or scan your public key from your phone</a>

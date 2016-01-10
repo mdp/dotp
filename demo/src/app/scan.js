@@ -1,3 +1,5 @@
+let dotpCrypt = require('dotp-crypt')
+
 function redirect(publicID) {
   console.log('redirect')
   let search = window.location.search
@@ -16,8 +18,13 @@ $(document).ready(function(){
   forceSSL()
   $('#reader').html5_qrcode(function(data){
     $('#read').html(data);
-    document.body.style.background = '#44AA44';
-    redirect(data);
+    try {
+      dotpCrypt.getPublicKeyFromPublicID(data)
+      document.body.style.background = '#44AA44';
+      redirect(data);
+    } catch (e) {
+      console.log('Bad decode:', e)
+    }
   },
   function(error){
   }, function(videoError){
