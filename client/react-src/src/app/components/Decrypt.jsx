@@ -30,7 +30,7 @@ class Decrypt extends React.Component {
     return (
       <div style={containerStyle}>
         <div className='monospace'>OTP: {this.state.result.otp}</div>
-        <div className='monospace'>Key: {this.state.result.key.hash()}</div>
+        <div className='monospace'>Key: {this.state.result.key.get('publicID')}</div>
       </div>
     );
   }

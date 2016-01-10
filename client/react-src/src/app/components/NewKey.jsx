@@ -25,7 +25,6 @@ class NewKey extends React.Component {
     let randArr = new Uint8Array(SeedLen)
     window.crypto.getRandomValues(randArr)
     for (let i=0; i < SeedLen; i++) {
-      if (i > 0 && i % 4 === 0) seed = seed + ' '
       seed = seed + SeedCharSet.substr(randArr[i]%32,1)
     }
     return seed.toUpperCase()
@@ -44,11 +43,11 @@ class NewKey extends React.Component {
   }
 
   _handleAddKey() {
-    let seed = this.state.seed.replace(/[^a-zA-Z0-9]/,'')
+    let seed = this.state.seed
     let privateKey = dotpCrypt.nacl.hash(new Buffer(seed))
     privateKey = privateKey.subarray(0,32)
     KeyStore.create(privateKey, this.state.name)
-    this.props.history.pushState(null, '/')
+    this.props.history.pushState(null, `/add/confirm/${seed}`)
   }
 
   render() {

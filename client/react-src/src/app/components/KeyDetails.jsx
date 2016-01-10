@@ -46,6 +46,10 @@ class KeyDetails extends React.Component {
     }
   }
 
+  _edit() {
+    this.props.history.pushState(null, `${this.state.key.get('publicID')}/edit`)
+  }
+
   render() {
     console.log('Details Render', this.state.key.get('publicID'))
     return (
@@ -69,7 +73,7 @@ class KeyDetails extends React.Component {
           <span className="icon icon-trash"></span>
           Delete
         </button>
-        <button className="btn btn-positive btn-block">
+        <button className="btn btn-positive btn-block" onClick={()=> this._edit()}>
           <span className="icon icon-edit"></span>
           Edit
         </button>
