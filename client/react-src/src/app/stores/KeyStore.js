@@ -4,25 +4,25 @@ let localStorage = window.localStorage
 let _data = {};
 
 class KeyPair {
-  constructor(keyPair){
-    this.keyPair = keyPair
+  constructor(data){
+    this.data = data
   }
 
-  hash() {
-    return this.keyPair.publicID
+  get(key) {
+    return this.data[key]
   }
 
   pretty() {
-    return this.keyPair.humanName || this.keyPair.publicID.substr(0,12)
+    return this.data.name || this.data.publicID.substr(0,12)
   }
 
   destroy() {
-    return localStorage.removeItem(this.keyPair.publicID)
+    return localStorage.removeItem(this.data.publicID)
   }
 
   decrypt(challenge){
     try {
-      return new Buffer(dotpCrypt.decryptChallenge(challenge, this.keyPair.secretKey)).toString()
+      return new Buffer(dotpCrypt.decryptChallenge(challenge, this.data.secretKey)).toString()
     } catch (e) {
       console.log('Failed to decrypt', e)
       return false
@@ -42,15 +42,16 @@ exports.decryptChallenge = function(challenge) {
   return {key: key, otp: otp}
 }
 
-function serializeSecretKey(secretKey, humanName) {
+function serialize(secretKey, name) {
   let data = {
     secretKey: dotpCrypt.utils.Base58.encode(secretKey),
-    humanName: humanName,
+    name: name,
+    createdAt: Date.now(),
   }
   return JSON.stringify(data)
 }
 
-function deserializeToKeyPair(str) {
+function deserialize(str) {
   let data = JSON.parse(str)
   let secretKey = new Uint8Array(dotpCrypt.utils.Base58.decode(data.secretKey))
   let keyPair = dotpCrypt.nacl.box.keyPair.fromSecretKey(new Uint8Array(secretKey))
@@ -59,7 +60,8 @@ function deserializeToKeyPair(str) {
     secretKey: secretKey,
     publicKey: keyPair.publicKey,
     publicID: publicID,
-    humanName: data.humanName,
+    name: data.name,
+    createdAt: data.createdAt,
   }
 }
 
@@ -83,12 +85,12 @@ exports.create = function(privateKey, name) {
   } catch (e) {
     console.log(e)
   }
-  localStorage.setItem(publicID, serializeSecretKey(keyPair.secretKey, name))
+  localStorage.setItem(publicID, serialize(keyPair.secretKey, name))
 }
 
 exports.get = function(publicID) {
   let key = localStorage.getItem(publicID)
-  return new KeyPair(deserializeToKeyPair(key))
+  return new KeyPair(deserialize(key))
 }
 
 // Returns all the keys we know about
@@ -99,7 +101,7 @@ exports.getAll = function(filter) {
   }
   let data = []
   for (let key of keys) {
-    let keyPair = deserializeToKeyPair(key)
+    let keyPair = deserialize(key)
     if (filter && keyPair.publicKey[0] === filter) {
       data.push(new KeyPair(keyPair))
     } else {

@@ -54,15 +54,15 @@ class NewKey extends React.Component {
   render() {
     return (
       <div style={containerStyle}>
-        <input type='text' placeholder='Name' value={this.state.name} onChange={this._updateName.bind(this)}/>
-        <div className='monospace'>{this.state.seed}</div>
+        <input type='text' className='form-control' placeholder='Key Name' value={this.state.name} onChange={this._updateName.bind(this)}/>
         <button className="btn btn-positive btn-block" onClick={()=>this._handleAddKey()}>
           <span className="icon"></span>
-          Create
+          Create New Key
         </button>
+        <hr />
         <button className="btn btn-positive btn-block" onClick={()=> this.props.history.pushState(null, '/import')}>
           <span className="icon"></span>
-          Import From Seed
+          Import From Backup
         </button>
       </div>
     );

@@ -60,8 +60,8 @@ class ImportKey extends React.Component {
   render() {
     return (
       <div style={containerStyle}>
-        <input type='text' placeholder='Name' value={this.state.name} onChange={this._updateName.bind(this)}/>
-        <input type='text' placeholder='Seed' value={this.state.seed} onChange={this._updateSeed.bind(this)}/>
+        <input type='text' className='form-control' placeholder='Name' value={this.state.name} onChange={this._updateName.bind(this)}/>
+        <textarea type='text' className='form-control big' placeholder='Backup Key' value={this.state.seed} onChange={this._updateSeed.bind(this)}/>
         <button className="btn btn-positive btn-block" onClick={()=>this._handleAddKey()}>
           <span className="icon icon-plus"></span>
           Import

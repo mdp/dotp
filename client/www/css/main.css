@@ -9,6 +9,39 @@
 .monospace {
   font-family: 'Inconsolata', monospace;
   font-weight: 700;
+  font-size: 2em;
+}
+
+.section {
+  padding: 0.5em;
+  border-radius: 15px;
+  margin: 2em;
+  border: 1px solid #333;
+}
+
+table.details {
+  font-size: 1em;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+input {
+  margin: 0.6em 0;
+}
+
+textarea {
+  margin: 0.6em 0;
+}
+
+input.form-control {
+  height: 54px;
+  font-size: 2em;
+}
+
+textarea.big {
+  height: 54px;
+  font-size: 2em;
+  height: 6em;
 }
 
 a:hover {

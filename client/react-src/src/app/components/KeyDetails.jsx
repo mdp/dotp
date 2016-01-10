@@ -34,24 +34,36 @@ class KeyDetails extends React.Component {
   componentDidMount() {
     console.log('QRCode Render', this.state.key)
     new QRCode(document.getElementsByClassName("qrcode")[0], {
-      text:this.state.key.hash(),
-      correctLevel : QRCode.CorrectLevel.L,
+      text:this.state.key.get('publicID'),
+      correctLevel : QRCode.CorrectLevel.M,
     })
   }
 
   _deleteKey() {
     if (confirm("Are you absolutely sure you want to delete this key?")) {
-      KeyStore.destroy(this.state.key.hash())
+      KeyStore.destroy(this.state.key.get('publicID'))
       this.props.history.goBack()
     }
   }
 
   render() {
-    console.log('Details Render', this.state.key.hash())
+    console.log('Details Render', this.state.key.get('publicID'))
     return (
       <div style={containerStyle}>
         <div className='qrcode-container'> <div className='qrcode' />
-        <div className='monospace'>{this.state.key.hash().match(/.{1,15}/g).join(' ')}</div>
+        <h3>{this.state.key.pretty()}</h3>
+        <table className="table details">
+          <tbody>
+            <tr>
+              <td>Public ID:</td>
+              <td>{this.state.key.get('publicID').match(/.{1,10}/g).join(' ')}</td>
+            </tr>
+            <tr>
+              <td>Created At:</td>
+              <td>{new Date(this.state.key.get('createdAt')).toString()}</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
         <button className="btn btn-negative btn-block" onClick={()=> this._deleteKey()}>
           <span className="icon icon-trash"></span>

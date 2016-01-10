@@ -55,7 +55,9 @@ class KeyList extends React.Component {
   _scan() {
     if (window.cordova) {
       window.cordova.plugins.barcodeScanner.scan((result) => {
-        this.props.history.pushState(null, '/decrypt/'+result.text);
+        if (result.text && result.text.length > 0) {
+          this.props.history.pushState(null, '/decrypt/'+result.text);
+        }
       }, (error) => {
         alert("Scanning failed: " + error)
       })
@@ -72,10 +74,10 @@ class KeyList extends React.Component {
           {
             this.state.keys.map((key) => {
             return(
-                <tr onTouchTap={()=> this._openKey(key.hash())} key={key.hash()} >
+                <tr onTouchTap={()=> this._openKey(key.get('publicID'))} key={key.get('publicID')} >
                   <td>
                     <div>{key.pretty()}</div>
-                    <div className='monospace' style={{color:'#555', fontSize: '0.8em'}}>{key.hash().substr(0,15)}</div>
+                    <div className='monospace' style={{color:'#555', fontSize: '0.8em'}}>{key.get('publicID').substr(0,15)}</div>
                   </td>
                 </tr>
             )
