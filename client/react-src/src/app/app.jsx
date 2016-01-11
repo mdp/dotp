@@ -9,7 +9,6 @@ import NewKey from './components/NewKey';
 import EditKey from './components/EditKey';
 import NewKeyConfirm from './components/NewKeyConfirm';
 import ImportKey from './components/ImportKey';
-import Scan from './components/Scan';
 import Decrypt from './components/Decrypt';
 
 import KeyStore from './stores/KeyStore'
@@ -32,7 +31,6 @@ ReactDOM.render((
       <Route path='/add/confirm/:seed' component={NewKeyConfirm} />
       <Route path='/add' component={NewKey} />
       <Route path='/import' component={ImportKey} />
-      <Route path='/scan' component={Scan} />
       <Route path='/decrypt/:challenge' component={Decrypt} />
       <Route path='/:keyId/edit' component={EditKey} />
       <Route path='/:keyId' component={KeyDetails} />

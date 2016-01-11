@@ -90,7 +90,7 @@ class KeyList extends React.Component {
             </tr>
           </tbody>
           </table>
-          <div className="md-floating-btn" onClick={()=>this._scan()}>
+          <div className="md-floating-btn" onTouchTap={()=>this._scan()}>
             <span className='icon glyphicon glyphicon-qrcode'/>
           </div>
         </div>

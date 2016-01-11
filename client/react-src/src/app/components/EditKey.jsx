@@ -39,7 +39,7 @@ class EditKey extends React.Component {
     return (
       <div style={containerStyle}>
         <input type='text' className='form-control' placeholder='Key Name' value={this.state.name} onChange={this._updateName.bind(this)}/>
-        <button className="btn btn-positive btn-block" onClick={()=>this._handleAddKey()}>
+        <button className="btn btn-positive btn-block" onTouchTap={()=>this._handleAddKey()}>
           <span className="icon"></span>
           Update Key
         </button>

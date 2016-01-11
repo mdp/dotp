@@ -39,7 +39,7 @@ class NewKeyConfirm extends React.Component {
           <p className='monospace'>{this.state.seed}</p>
         </div>
         <p style={{margin: '0 2em 2em 2em', fontWeight:'bold', color: '#CC3333'}}>Write down this backup key, it's the only way to recover a dOTP key if you lose access to your phone or accidentally delete the keypair!</p>
-        <button className="btn btn-positive btn-block" onClick={()=>this._done()}>
+        <button className="btn btn-positive btn-block" onTouchTap={()=>this._done()}>
         <span className="icon"></span>
         OK, I got it!
         </button>

@@ -69,11 +69,11 @@ class KeyDetails extends React.Component {
           </tbody>
         </table>
         </div>
-        <button className="btn btn-negative btn-block" onClick={()=> this._deleteKey()}>
+        <button className="btn btn-negative btn-block" onTouchTap={()=> this._deleteKey()}>
           <span className="icon icon-trash"></span>
           Delete
         </button>
-        <button className="btn btn-positive btn-block" onClick={()=> this._edit()}>
+        <button className="btn btn-positive btn-block" onTouchTap={()=> this._edit()}>
           <span className="icon icon-edit"></span>
           Edit
         </button>
