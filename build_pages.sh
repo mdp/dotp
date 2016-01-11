@@ -15,4 +15,7 @@ git add .
 git ci -m "Update gh-pages"
 git push origin gh-pages
 cd ..
+git add pages
+git ci -m "Update gh-pages submodule"
+git push origin master
 
