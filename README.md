@@ -23,29 +23,36 @@ Android/iOS Demo included in the repo.
 
 Challenges are meant to be encoded as a QR Code and scanned by the authenticating user. They have the following format (Value[byte size]):
 
-Base58Encode(Version[1]|ExpiresAt[5]|PublicKeyFirstByte[1]|Nonce[24]|ChallengersPublicKey[32]|Box[...])
+Base58Encode(Version[1]|PublicKeyFirstByte[1]|ChallengersPublicKey[32]|Box[...])
 
 Broken down:
 
 - Version: Currently at 0, allows the challenge protocol to change as needed
-- ExpiresAs: Unix timestamp in seconds. 40 bits, works past 2106, but fits in a Javascript double
 - PublicKeyFirstByte: Lets the client narrow down keys to attempt, but doesn't give away the authenticators public key
-- Nonce: the 24 byte nonce used in NaCL
-- ChallengersPublicKey: the 32 byte public key of the challenger. Needed to decrypt the ciphertext
+- ChallengersPublicKey: the 32 byte public key of the challenger. Should be from a new keypair each time
 - Box: the NaCL cipher text, variable size
 
 In JavaScript it looks like this:
 
 ```javascript
-function(expiresAt, recPubKeyFirstByte, nonce, challengerPub, box) {
-  var challenge = new Uint8Array(1+5+1+24+32+box.length)
-  var expiresAtArr = intTo5Bytes(expiresAt)
+function(recPubKeyFirstByte, challengerPub, box) {
+  var challenge = new Uint8Array(1+1+32+box.length)
   challenge[0] = VERSION
-  challenge.set(expiresAtArr, 1)
   challenge[6] = recPubKeyFirstByte
-  challenge.set(nonce, 7)
   challenge.set(challengerPub, 31)
   challenge.set(box, 63)
   return Base58.encode(challenge)
 }
 ```
+
+##### Cryptography behind dOTP
+
+The basics are as follows:
+- NaCL [crypto box](https://nacl.cr.yp.to/box.html) function used to encrypt the OTP, passed the following values
+  - The OTP we are encrypting for the recipient/authenticator
+  - Nonce consisting of 24 '0' bytes
+  - Public Key of the recipient/authenticator
+  - Challengers secret key *Must be a newly generated secret each time we encrypt due to the reused nonce*
+
+`NaCl.crypto_box(otp, nonce[24 bytes], publicKey[32 bytes], ChallengerSecretKey[32 bytes])`
+
