@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.3.14",
-    "dotp-crypt": "^0.1.0",
+    "dotp-crypt": "^0.3.0",
     "exports-loader": "^0.6.2",
     "history": "^1.17.0",
     "imports-loader": "^0.6.5",
