@@ -89,13 +89,14 @@ class Challenger extends React.Component {
     return (
       <div style={containerStyle}>
         <div className='container centered'>
+          <h2>Challenge QR Code</h2>
           <div className='qrcode' />
         </div>
         <div className='container align-left'>
           <div className='row'>
             <div className='col-md-6 col-md-offset-3'>
                 <div className="form-group">
-                  <label>One Time Password</label>
+                  <label>Response</label>
                   <input type="text" className={this.state.success ? "form-control success" :"form-control"} id="otp" placeholder="One Time Password" onChange={this._updateResponse.bind(this)} value={this.state.response} />
                 </div>
               <h4>Nitty Gritty</h4>
