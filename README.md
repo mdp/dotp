@@ -50,9 +50,20 @@ function(recPubKeyFirstByte, challengerPub, box) {
 The basics are as follows:
 - NaCL [crypto box](https://nacl.cr.yp.to/box.html) function used to encrypt the OTP, passed the following values
   - The OTP we are encrypting for the recipient/authenticator
-  - Nonce consisting of 24 '0' bytes
+  - Nonce consisting of 24 '0' bytes __Must generate a new KeyPair for each authentication__
   - Public Key of the recipient/authenticator
-  - Challengers secret key *Must be a newly generated secret each time we encrypt due to the reused nonce*
+  - Challengers secret key __Must be a newly generated secret each time we encrypt due to the reused nonce__
 
 `NaCl.crypto_box(otp, nonce[24 bytes], publicKey[32 bytes], ChallengerSecretKey[32 bytes])`
+
+###### Why set the Nonce to a static value?
+
+Nonce reuse is dangerous anytime a value is encrypted with the same KeyPair. In our case we ALWAYS use a new randomly generated KeyPair for each authentication.
+
+There's little benefit the server reusing the same keypair for each authentication. Although we can verify that the same server has signed the key, it's impossible to verify the sender is actually who they say they are.
+
+dOTP assumes the following:
+- The QRCode is displayed via a secure channel (HTTPS/SSH)
+- The Challenge QRCode does not prove that the sender displaying the QRCode is the same person that signed it. If an attacker can insert themselves in the middle of the authentication they can simply intercept the users entry of the OTP and proxy it to the original sender. It's therefore imperative that this only be used over an already secure channel!
+- It's primary use will be terminal based authentication where a smaller barcode is prefered.
 
