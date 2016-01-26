@@ -9,7 +9,18 @@ Based on the NaCL encryption library from Daniel Bernstein, it uses public key e
 
 Unlike typical One Time Passwords where a secret is shared between the two parties, dOTP only requires that the 'challenger' know the user's public key. The challenger then creates a random One Time Password and encrypts it with the public key of the recipient. This is then displayed to the user as a QR code which can be scanned and decrypted with a mobile app to reveal the One Time Password
 
-Android/iOS Demo included in the repo.
+Android/iOS Demo can be found at [mdp/dAuth](https://github.com/mdp/dAuth)
+
+### Example use for SSH Two Factor
+
+Setup: This assumes that we have the [dotp CLI](https://github.com/mdp/go-dotp) installed on the server and SSH setup for enforcing two factor.
+
+From our terminal it looks like this:
+![Terminal two factor](/mdp/dotp/raw/master/sshTwoFactor.gif)
+
+And using the iOS app looks like this:
+![iOS app](/mdp/dotp/raw/master/dAuthScan.gif)
+
 
 #### Basic steps to using dOTP
 
