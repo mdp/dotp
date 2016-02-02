@@ -71,11 +71,11 @@ The basics are as follows:
 
 ##### Why set the Nonce to a static value?
 
+Using a static nonce allows us to shorten the length of the challenge since the nonce doesn't need to be included.
+
 "There is no harm in having the same nonce for different messages if the {sender, receiver} sets are different" - NaCL docs
 
-"A receiver can freely modify a boxed message, and therefore cannot convince third parties that this particular message came from the sender." - NaCL docs
-
-Therefore there is little benefit the Challenger reusing the same KeyPair for each authentication. In this case we can save space be using a static nonce without compromising security.
+There is little benefit from the Challenger reusing the same KeyPair for authentication. If the authentication channel is compromised (MITM), there's no way to ensure that the person presenting the challenge is the person who created it. Sender authentication only adds confusion for the end user (eg. "This challenge was created by Bob, but does not guarantee that Bob is the one presenting it for you to solve")
 
 dOTP assumes the following:
 - The QRCode is displayed via a secure channel (HTTPS/SSH)
