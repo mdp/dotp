@@ -16,9 +16,11 @@ Android/iOS Demo can be found at [mdp/dAuth](https://github.com/mdp/dAuth)
 Setup: This assumes that we have the [dotp CLI](https://github.com/mdp/go-dotp) installed on the server and SSH setup for enforcing two factor.
 
 From our terminal it looks like this:
+
 ![Terminal two factor](https://github.com/mdp/dotp/raw/master/sshTwoFactor.gif)
 
 And using the iOS app looks like this:
+
 ![iOS app](https://github.com/mdp/dotp/raw/master/dAuthScan.gif)
 
 
