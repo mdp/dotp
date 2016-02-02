@@ -42,7 +42,7 @@ Broken down:
 
 - Version: Currently at 0, allows the challenge protocol to change as needed
 - PublicKeyFirstByte: Lets the client narrow down keys to attempt, but doesn't give away the authenticators public key
-- ChallengersPublicKey: the 32 byte public key of the challenger. __Should never be reused__
+- ChallengersPublicKey: the 32 byte public key of the challenger. __Must never be reused__
 - Box: the NaCL cipher text, variable size
 
 In JavaScript it looks like this:
