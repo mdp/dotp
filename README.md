@@ -1,7 +1,7 @@
 # dOTP
 ##decentralized One Time Passwords
 
-_Don't use me, I'm very new, untested and more of a prototype of an idea than a functional system_
+__Don't use me, I'm very new, untested and more of a prototype of an idea than a functional system__
 
 ### Details
 
