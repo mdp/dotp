@@ -33,22 +33,21 @@ class Challenger extends React.Component {
 
   constructor (p, c) {
     super(p, c)
-    this.state = this.getInitialState()
+    this.state = this.fetchInitialState()
   }
 
-  getInitialState() {
-    let randomSecret = new Uint8Array(32)
-    crypto.getRandomValues(randomSecret)
-    let serverKeyPair = dotpCrypt.getKeyPair(randomSecret)
+  fetchInitialState() {
+    console.log('RouteId', this.props.routeParams.keyId)
+    let ephemeralKey = new Uint8Array(32)
+    crypto.getRandomValues(ephemeralKey)
     let recPublicId = this.props.routeParams.keyId
     let otp = this._getRandomOTP(9)
-    let challenge = dotpCrypt.createChallenge(new Buffer(otp), serverKeyPair, recPublicId)
+    let challenge = dotpCrypt.createChallenge(new Buffer(otp), recPublicId, ephemeralKey)
     return {
       recipient: recPublicId,
       challenge: challenge,
       otp: otp,
       response: '',
-      serverKeyPair: serverKeyPair,
       success: false,
     };
   }
@@ -103,7 +102,6 @@ class Challenger extends React.Component {
               <table className='table'>
                 <tbody>
                   <tr><td><strong>PublicKey:</strong></td><td>{this.state.recipient}</td></tr>
-                  <tr><td><strong>Server Public Key: </strong></td><td>{dotpCrypt.utils.Base58.encode(this.state.serverKeyPair.publicKey)}</td></tr>
                 </tbody>
               </table>
             </div>
