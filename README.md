@@ -4,12 +4,12 @@
 __WARNING__
 
 This code has not been audited or vetted in any way.
-I make no guarantees about it's security or safety.
+I make no guarantees about its security or safety.
 This is more of a prototype than a fully baked two factor authentication system.
 
 ### Details
 
-Based on the LibSodium(NaCL) encryption library, it uses public key encryption to build a challenge and response system for creating One Time Passwords (OTP)
+Based on the LibSodium(NaCL) encryption library, dOTP uses public key encryption to build a challenge and response system for creating One Time Passwords (OTP)
 
 Unlike typical One Time Passwords where a secret is shared between the two parties, dOTP only requires that the 'challenger' know the user's public key. The challenger then creates a random One Time Password and encrypts it with the public key of the recipient. This is displayed to the recipient as a QR code which the recipient scans and decrypts using a mobile app to reveal the One Time Password
 
@@ -72,5 +72,5 @@ The basics are as follows:
 dOTP assumes the following:
 - The QRCode is displayed via a secure channel (HTTPS/SSH)
 - The Challenge QRCode does not prove that the sender displaying the QRCode is the same person that created it. If an attacker can insert themselves in the middle of the authentication they can simply intercept the users entry of the OTP and proxy it to the original sender. It's therefore imperative that this only be used over an already secure channel!
-- It's primary use will be terminal based authentication where a smaller barcode is prefered.
+- Its primary use will be terminal based authentication where a smaller barcode is prefered.
 
