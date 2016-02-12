@@ -25,7 +25,7 @@ From our terminal it looks like this:
 
 And using the iOS app looks like this:
 
-![iOS app](https://github.com/mdp/dotp/raw/master/dAuthScan.gif)
+![iOS app](https://github.com/mdp/dotp/raw/master/dAuthDemo1.gif)
 
 
 #### Basic steps to using dOTP
