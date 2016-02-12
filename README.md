@@ -1,7 +1,11 @@
 # dOTP
 ##decentralized One Time Passwords
 
-__Don't use me, I'm very new, untested and more of a prototype of an idea than a functional system__
+__WARNING__
+
+This code has not been audited or vetted in any way.
+I make no guarantees about it's security or safety.
+This is more of a prototype than a fully baked two factor authentication system.
 
 ### Details
 
@@ -50,8 +54,8 @@ In JavaScript it looks like this:
 function(recPubKeyFirstByte, challengerPub, box) {
   var challenge = new Uint8Array(1+1+box.length)
   challenge[0] = VERSION
-  challenge[6] = recPubKeyFirstByte
-  challenge.set(box, 63)
+  challenge[1] = recPubKeyFirstByte
+  challenge.set(box, 2)
   return Base58.encode(challenge)
 }
 ```
