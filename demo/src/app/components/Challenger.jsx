@@ -38,11 +38,12 @@ class Challenger extends React.Component {
 
   fetchInitialState() {
     console.log('RouteId', this.props.routeParams.keyId)
+    let serverName = window.location.origin
     let ephemeralKey = new Uint8Array(32)
     crypto.getRandomValues(ephemeralKey)
     let recPublicId = this.props.routeParams.keyId
     let otp = this._getRandomOTP(9)
-    let challenge = dotpCrypt.createChallenge(new Buffer(otp), recPublicId, ephemeralKey)
+    let challenge = dotpCrypt.createChallenge(otp, recPublicId, serverName, ephemeralKey)
     return {
       recipient: recPublicId,
       challenge: challenge,
