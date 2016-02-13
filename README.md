@@ -21,7 +21,7 @@ Setup: This assumes that we have the [dotp CLI](https://github.com/mdp/go-dotp) 
 
 From our terminal it looks like this:
 
-![Terminal two factor](https://github.com/mdp/dotp/raw/master/sshTwoFactor.gif)
+![Terminal two factor](https://github.com/mdp/dotp/raw/master/sshTwoFactor1.gif)
 
 And using the iOS app looks like this:
 
