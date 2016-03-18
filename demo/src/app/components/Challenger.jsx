@@ -29,6 +29,22 @@ function randomUpTo(k, r, s) {
   }
 }
 
+
+class OpenInAppButton extends React.Component {
+  isMobile() {
+    return true
+    return /Mobi/.test(navigator.userAgent)
+  }
+
+  render() {
+    console.log(this.props)
+    if (this.isMobile()) {
+      return <h5><a href={'https://dauth.atrailing.space/' + this.props.challenge}>Open in App</a></h5>
+    }
+    return false
+  }
+}
+
 class Challenger extends React.Component {
 
   constructor (p, c) {
@@ -91,6 +107,7 @@ class Challenger extends React.Component {
         <div className='container centered'>
           <h2>Challenge QR Code</h2>
           <div className='qrcode' />
+          <OpenInAppButton challenge={this.state.challenge}/>
         </div>
         <div className='container align-left'>
           <div className='row'>
