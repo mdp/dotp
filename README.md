@@ -64,13 +64,12 @@ function(recPubKeyFirstByte, challengerPub, box) {
 
 The basics are as follows:
 - Libsodium [crypto_box_seal](https://download.libsodium.org/doc/public-key_cryptography/sealed_boxes.html) function used to encrypt the name of the challenger and the OTP, passed the following values
-  - The "ChallangerName:OTP" we are encrypting for the recipient/authenticator. eg. "github.com:12345678"
+  - The "ChallangerName|OTP" we are encrypting for the recipient/authenticator. eg. "https://github.com|12345678"
   - Public Key of the recipient/authenticator
 
 `Sodium.crypto_box_seal(otp, publicKey[32 bytes])`
 
-dOTP assumes the following:
-- The QRCode is displayed via a secure channel (HTTPS/SSH)
-- The Challenge QRCode does not prove that the sender displaying the QRCode is the same person that created it. If an attacker can insert themselves in the middle of the authentication they can simply intercept the users entry of the OTP and proxy it to the original sender. It's therefore imperative that this only be used over an already secure channel!
-- Its primary use will be terminal based authentication where a smaller barcode is preferred.
+__dOTP assumes that the QRCode is displayed via a secure channel (HTTPS/SSH)__
+
+The Challenge QRCode does not prove that the service displaying the QRCode is the same service that created it. The end user must make sure that they are authenticating over a secure channel, and that the challenger name (eg my.ssh.host.com) matches where the challenge code is being displayed.
 
