@@ -32,7 +32,6 @@ function randomUpTo(k, r, s) {
 
 class OpenInAppButton extends React.Component {
   isMobile() {
-    return true
     return /Mobi/.test(navigator.userAgent)
   }
 
