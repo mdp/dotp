@@ -18,14 +18,11 @@ Android/iOS Client Source Code [mdp/dAuth](https://github.com/mdp/dAuth)
 #### Design goals
 
 1. Should be completely decentralized. No third parties involved.
-  - There are plenty or services that provide a second factor authentication solution. These typically
+  - There are plenty of services that provide a second factor authentication solution. These typically
   are not free and fail if the third party goes down or is compromised.
-2. Should rely on public key encryption rather than symetric
-  - The current open standard for OTP relies on a shared key. This means that both the client
-  and the server must keep this key secret. dOTP means you can safely store a users public key in a database
-  without fear that it's exposure will compromise your security or the security of your users.
-  - Shared keys means that each client must use a different key for each service. dOTP allows users to share
-  their public key with as many services as they like.
+2. Should rely on public key encryption rather than symmetric
+  - The current open standard for OTP relies on a shared key. This means that both the client and the server must keep this key secret. dOTP means you can safely store a users public key in a database without fear that it's exposure will compromise your security or the security of your users.
+  - Shared keys means that each client must use a different key for each service. dOTP allows users to share their public key with as many services as they like.
 3. Should work on mobile
   - U2F is typically implemented as a hardware USB token, which makes it difficult to use with a mobile device (especially iOS)
 4. Should work completely offline
@@ -90,4 +87,3 @@ The basics are as follows:
 __dOTP assumes that the QRCode is displayed via a secure channel (HTTPS/SSH)__
 
 The Challenge QRCode does not prove that the service displaying the QRCode is the same service that created it. The end user must make sure that they are authenticating over a secure channel, and that the challenger name (eg my.ssh.host.com) matches where the challenge code is being displayed.
-
