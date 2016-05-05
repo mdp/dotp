@@ -11,9 +11,27 @@ This is more of a prototype than a fully baked two factor authentication system.
 
 Based on the LibSodium(NaCL) encryption library, dOTP uses public key encryption to build a challenge and response system for creating One Time Passwords (OTP)
 
-Unlike typical One Time Passwords where a secret is shared between the two parties, dOTP only requires that the 'challenger' know the user's public key. The challenger then creates a random One Time Password and encrypts it with the public key of the recipient. This is displayed to the recipient as a QR code which the recipient scans and decrypts using a mobile app to reveal the One Time Password
+[Android Beta](https://play.google.com/apps/testing/space.atrailing.dauth)
 
-Android/iOS Demo can be found at [mdp/dAuth](https://github.com/mdp/dAuth)
+Android/iOS Client Source Code [mdp/dAuth](https://github.com/mdp/dAuth)
+
+#### Design goals
+
+1. Should be completely decentralized. No third parties involved.
+  - There are plenty or services that provide a second factor authentication solution. These typically
+  are not free and fail if the third party goes down or is compromised.
+2. Should rely on public key encryption rather than symetric
+  - The current open standard for OTP relies on a shared key. This means that both the client
+  and the server must keep this key secret. dOTP means you can safely store a users public key in a database
+  without fear that it's exposure will compromise your security or the security of your users.
+  - Shared keys means that each client must use a different key for each service. dOTP allows users to share
+  their public key with as many services as they like.
+3. Should work on mobile
+  - U2F is typically implemented as a hardware USB token, which makes it difficult to use with a mobile device (especially iOS)
+4. Should work completely offline
+  - You should be able to airgap your mobile authentication device or autheticate when internet is not avaiable.
+5. Is usable as a single factor authentication and as an identity
+  - U2F must always be paired with an identity. dOTP is in and of itself an identity. (There are pros and cons to this)
 
 ### Example use for SSH Two Factor
 
@@ -64,7 +82,7 @@ function(recPubKeyFirstByte, challengerPub, box) {
 
 The basics are as follows:
 - Libsodium [crypto_box_seal](https://download.libsodium.org/doc/public-key_cryptography/sealed_boxes.html) function used to encrypt the name of the challenger and the OTP, passed the following values
-  - The "ChallangerName|OTP" we are encrypting for the recipient/authenticator. eg. "https://github.com|12345678"
+  - The "ChallengerName|OTP" we are encrypting for the recipient/authenticator. eg. "https://github.com|12345678"
   - Public Key of the recipient/authenticator
 
 `Sodium.crypto_box_seal(otp, publicKey[32 bytes])`
