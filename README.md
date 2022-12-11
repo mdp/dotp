@@ -1,5 +1,5 @@
 # dOTP
-##decentralized One Time Passwords
+## decentralized One Time Passwords
 
 __WARNING__
 
